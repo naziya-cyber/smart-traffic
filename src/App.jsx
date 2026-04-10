@@ -1,10 +1,17 @@
 import Map from './components/Map'
-import './App.css'
+import Navbar from './components/Navbar'
+import AlertPanel from './components/AlertPanel'
 
 function App() {
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
-      <Map />
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <Navbar />
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        <AlertPanel />
+        <div style={{ flex: 1 }}>
+          <Map />
+        </div>
+      </div>
     </div>
   )
 }
