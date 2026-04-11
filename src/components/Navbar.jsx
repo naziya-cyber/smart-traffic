@@ -1,4 +1,4 @@
-export default function Navbar() {
+export default function Navbar({ onReportClick }) {
   return (
     <div style={{
       backgroundColor: '#1a1a2e',
@@ -16,17 +16,21 @@ export default function Navbar() {
           SmartTraffic
         </span>
       </div>
-      <div style={{ display: 'flex', gap: '24px', fontSize: '14px' }}>
+      <div style={{ display: 'flex', gap: '24px', fontSize: '14px', alignItems: 'center' }}>
         <span style={{ color: '#4ade80' }}>● Live</span>
         <span>Delhi, India</span>
-        <span style={{
-          backgroundColor: '#e63946',
-          padding: '4px 12px',
-          borderRadius: '20px',
-          cursor: 'pointer',
-          fontSize: '13px'
-        }}>
-          Report Incident
+        <span
+          onClick={onReportClick}
+          style={{
+            backgroundColor: '#e63946',
+            padding: '6px 14px',
+            borderRadius: '20px',
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: '500',
+          }}
+        >
+          🚨 Report Incident
         </span>
       </div>
     </div>
