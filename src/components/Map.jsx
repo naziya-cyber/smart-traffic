@@ -80,20 +80,19 @@ const roads = [
     ],
   },
   {
-    name: 'Lajpat Nagar — Moderate Traffic',
-    color: '#f4a261',
-    positions: [
-      [28.5720, 77.2280], [28.5710, 77.2350], [28.5700, 77.2430],
-      [28.5690, 77.2510], [28.5680, 77.2590], [28.5690, 77.2670],
-      [28.5710, 77.2730],
-    ],
-  },
-  {
     name: 'Chandni Chowk — Heavy Traffic',
     color: '#e63946',
     positions: [
       [28.6560, 77.2140], [28.6550, 77.2200], [28.6540, 77.2270],
       [28.6530, 77.2340], [28.6520, 77.2410], [28.6510, 77.2470],
+    ],
+  },
+  {
+    name: 'Lajpat Nagar — Moderate Traffic',
+    color: '#f4a261',
+    positions: [
+      [28.5720, 77.2280], [28.5710, 77.2350], [28.5700, 77.2430],
+      [28.5690, 77.2510], [28.5680, 77.2590], [28.5690, 77.2670],
     ],
   },
   {
@@ -104,17 +103,9 @@ const roads = [
       [28.6200, 77.2340], [28.6200, 77.2420],
     ],
   },
-  {
-    name: 'Jamia Nagar — Moderate Traffic',
-    color: '#f4a261',
-    positions: [
-      [28.5610, 77.2900], [28.5580, 77.2980], [28.5550, 77.3060],
-      [28.5530, 77.3140], [28.5510, 77.3220], [28.5500, 77.3300],
-    ],
-  },
 ]
 
-export default function Map() {
+export default function Map({ onRoadClick }) {
   return (
     <MapContainer
       center={[28.6280, 77.2090]}
@@ -126,7 +117,6 @@ export default function Map() {
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution="CartoDB"
       />
-
       {roads.map((road, i) => (
         <Polyline
           key={i}
@@ -139,15 +129,22 @@ export default function Map() {
             lineJoin: 'round',
             smoothFactor: 2,
           }}
+          eventHandlers={{
+            click: () => onRoadClick(road.name),
+            mouseover: (e) => e.target.setStyle({ weight: 8, opacity: 1 }),
+            mouseout: (e) => e.target.setStyle({ weight: 5, opacity: 0.85 }),
+          }}
         >
           <Tooltip sticky>
             <div style={{ fontWeight: 600, fontSize: '13px' }}>
               {road.name}
             </div>
+            <div style={{ fontSize: '11px', color: '#666' }}>
+              Click for route suggestions
+            </div>
           </Tooltip>
         </Polyline>
       ))}
-
     </MapContainer>
   )
 }
