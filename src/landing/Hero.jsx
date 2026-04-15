@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import React from 'react';
+import TrafficScene from '../components/TrafficScene';
 
 const Hero = () => {
   const navigate = useNavigate()
@@ -21,9 +22,13 @@ const Hero = () => {
 
           <div className="hero-cta-group">
             
-            <button 
-              className="cta-primary" 
-              onClick={() => navigate('/dashboard')}
+            <button
+              className="cta-primary"
+              onClick={() => {
+                console.log('Navigating to dashboard');
+                navigate('/dashboard');
+              }}
+              style={{ cursor: 'pointer' }}
             >
               Launch Dashboard
             </button>
@@ -69,6 +74,9 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Animated Traffic Scene */}
+      <TrafficScene />
     </header>
   );
 };
